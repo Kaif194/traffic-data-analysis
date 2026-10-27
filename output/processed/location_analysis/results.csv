@@ -1,0 +1,11 @@
+Location,Road_Type,Total_Vehicles,Avg_Vehicle_Count,Avg_Speed_KMH,Sample_Count
+Industrial Ring Road,Highway,2745851,463.59,52.09,5923
+Downtown Highway A,Highway,2733009,458.56,52.21,5960
+Westside Junction,Urban Arterial,2727493,458.48,27.55,5949
+Tech Park Junction,City Street,2721947,457.24,27.86,5953
+Suburban Route 9,Rural Highway,2711419,458.32,52.17,5916
+Eastside Toll Plaza,Expressway,2709865,455.44,52.38,5950
+Bridge Crossing North,Highway,2705976,460.43,52.03,5877
+Central Avenue,City Street,2691731,456.61,27.42,5895
+Airport Expressway,Expressway,2677190,455.77,52.2,5874
+Midtown Expressway,Expressway,2631582,453.17,52.22,5807
