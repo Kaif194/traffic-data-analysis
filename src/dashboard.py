@@ -82,6 +82,16 @@ def load_processed_data_local():
     data["summary"] = data.get("traffic_summary")
     return data
 
+def render_dataframe(df):
+    """Renders DataFrame safely across all Streamlit versions."""
+    try:
+        st.dataframe(df, width="stretch")
+    except Exception:
+        try:
+            st.dataframe(df, use_container_width=True)
+        except Exception:
+            st.dataframe(df)
+
 def main():
     st.markdown('<div class="main-header">🚗 Traffic Data Analytics Dashboard</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Powered by <b>Apache Spark / PySpark</b> & <b>Garage Object Storage / AWS S3</b></div>', unsafe_allow_html=True)
@@ -164,7 +174,7 @@ def main():
         st.line_chart(df_hourly.set_index("Hour")[["Avg_Vehicle_Count", "Avg_Speed_KMH"]])
         
         st.markdown("#### Hourly Summary Breakdown")
-        st.dataframe(df_hourly, width=None)
+        render_dataframe(df_hourly)
 
     with tab2:
         st.subheader("Top Busiest Locations across Highway Network")
@@ -174,7 +184,7 @@ def main():
             
             st.bar_chart(df_top.set_index("Location")["Total_Vehicles"])
             st.markdown("#### Location Ranking Data Table")
-            st.dataframe(df_top, width=None)
+            render_dataframe(df_top)
 
     with tab3:
         st.subheader("Impact of Weather Conditions on Vehicle Speed & Congestion")
@@ -188,14 +198,14 @@ def main():
                 st.markdown("**Total Vehicles Recorded by Weather**")
                 st.bar_chart(weather_df.set_index("Weather")["Total_Vehicles"])
                 
-            st.dataframe(weather_df, width=None)
+            render_dataframe(weather_df)
 
     with tab4:
         st.subheader("Traffic Pattern Comparison: Weekdays vs Weekends")
         day_df = data["day_type_analysis"]
         if day_df is not None:
             st.bar_chart(day_df.set_index("Day_Type")[["Avg_Vehicle_Count", "Avg_Speed_KMH"]])
-            st.dataframe(day_df, width=None)
+            render_dataframe(day_df)
 
     st.markdown("---")
     st.caption("College Big Data & Cloud Computing Project | Apache Spark & AWS S3 Integration")
